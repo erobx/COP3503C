@@ -32,7 +32,7 @@ public:
 };
 
 class Square : public Shape2D {
-    string name;
+    string name = "Square";
     float length;
 public:
     Square();
@@ -45,7 +45,7 @@ public:
 };
 
 class Triangle : public Shape2D {
-    string name;
+    string name = "Triangle";
     float base;
     float height;
 public:
@@ -59,7 +59,7 @@ public:
 };
 
 class Circle : public Shape2D {
-    string name;
+    string name = "Circle";
     float radius;
     const float PI = 3.14159f;
 public:

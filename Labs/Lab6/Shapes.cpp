@@ -3,18 +3,28 @@
 #include <iostream>
 using namespace std;
 
-// void Shape2D::ShowArea() const {
-//     cout << GetName2D() << endl;
-//     cout << Area() << endl;
-// }
+void Shape2D::ShowArea() const {
+    cout << GetName2D() << endl;
+    cout << Area() << endl;
+}
+
+bool Shape2D::operator>(const Shape2D &rhs) const {
+    return this->Area() > rhs.Area();
+}
+
+bool Shape2D::operator<(const Shape2D &rhs) const {
+    return this->Area() < rhs.Area();
+}
+
+bool Shape2D::operator==(const Shape2D &rhs) const {
+    return this->Area() == rhs.Area();
+}
 
 Square::Square() {
-    name = "Square";
     length = 0;
 }
 
 Square::Square(float length) {
-    name = "Square";
     this->length = length;
 }
 
@@ -36,13 +46,11 @@ string Square::GetName2D() const {
 }
 
 Triangle::Triangle() {
-    string name = "Triangle";
     base = 0;
     height = 0;
 }
 
 Triangle::Triangle(float base, float height) {
-    string name = "Triangle";
     this->base = base;
     this->height = height;
 }
@@ -67,12 +75,10 @@ string Triangle::GetName2D() const {
 }
 
 Circle::Circle() {
-    string name = "Circle";
     radius = 0;
 }
 
 Circle::Circle(float radius) {
-    string name = "Circle";
     this->radius = radius;
 }
 
