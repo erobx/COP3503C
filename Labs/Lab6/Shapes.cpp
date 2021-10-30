@@ -2,8 +2,7 @@
 #include <math.h>
 
 void Shape2D::ShowArea() const {
-    cout << GetName2D() << endl;
-    cout << Area() << endl;
+    cout << "The area of the " << GetName2D() << " is : " << Area() << endl;
 }
 
 bool Shape2D::operator>(const Shape2D &rhs) const {
@@ -19,8 +18,7 @@ bool Shape2D::operator==(const Shape2D &rhs) const {
 }
 
 void Shape3D::ShowVolume() const {
-    cout << GetName3D() << endl;
-    cout << Volume() << endl;
+    cout << "The volume of the " << GetName3D() << " is : " << Volume() << endl;
 }
 
 bool Shape3D::operator>(const Shape3D &rhs) const {
