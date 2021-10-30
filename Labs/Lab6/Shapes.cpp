@@ -1,7 +1,5 @@
 #include "Shapes.h"
 #include <math.h>
-#include <iostream>
-using namespace std;
 
 void Shape2D::ShowArea() const {
     cout << GetName2D() << endl;
@@ -20,6 +18,23 @@ bool Shape2D::operator==(const Shape2D &rhs) const {
     return this->Area() == rhs.Area();
 }
 
+void Shape3D::ShowVolume() const {
+    cout << GetName3D() << endl;
+    cout << Volume() << endl;
+}
+
+bool Shape3D::operator>(const Shape3D &rhs) const {
+    return this->Volume() > rhs.Volume();
+}
+
+bool Shape3D::operator<(const Shape3D &rhs) const {
+    return this->Volume() < rhs.Volume();
+}
+
+bool Shape3D::operator==(const Shape3D &rhs) const {
+    return this->Volume() == rhs.Volume();
+}
+
 Square::Square() {
     length = 0;
 }
@@ -33,7 +48,7 @@ void Square::Scale(float scalefactor) {
 }
 
 void Square::Display() const {
-    cout << "The area of the Square is : " << Area() << endl;
+    cout << "The area of the " << GetName2D() << " is : " << Area() << endl;
     cout << "Length of a side: " << length << endl;
 }
 
@@ -61,7 +76,7 @@ void Triangle::Scale(float scalefactor) {
 }
 
 void Triangle::Display() const {
-    cout << "The area of the Triangle is : " << Area() << endl;
+    cout << "The area of the " << GetName2D() << " is : " << Area() << endl;
     cout << "Base: " << base << endl;
     cout << "Height: " << height << endl;
 }
@@ -87,7 +102,7 @@ void Circle::Scale(float scalefactor) {
 }
 
 void Circle::Display() const {
-    cout << "The area of the Circle is : " << Area() << endl;
+    cout << "The area of the " << GetName2D() << " is : " << Area() << endl;
     cout << "Radius: " << radius << endl;
 }
 
@@ -99,3 +114,82 @@ string Circle::GetName2D() const {
     return name;
 }
 
+TriangularPyramid::TriangularPyramid() : Triangle() {
+    height = 0;
+}
+
+TriangularPyramid::TriangularPyramid(float height, float base, float height2) : Triangle(base, height2) {
+    this->height = height;
+}
+
+void TriangularPyramid::Scale(float scalefactor) {
+    height *= scalefactor;
+    Triangle::Scale(scalefactor);
+}
+
+void TriangularPyramid::Display() const {
+    cout << "The volume of the " << GetName3D() << " is : " << Volume() << endl;
+    cout << "The height is: " << height << endl;
+    Triangle::Display();
+}
+
+float TriangularPyramid::Volume() const {
+    return Area() * height / 3;
+}
+
+string TriangularPyramid::GetName3D() const {
+    return name;
+}
+
+Cylinder::Cylinder() : Circle() {
+    height = 0;
+}
+
+Cylinder::Cylinder(float height, float radius) : Circle(radius) {
+    this->height = height;
+}
+
+void Cylinder::Scale(float scalefactor) {
+    height *= scalefactor;
+    Circle::Scale(scalefactor);
+}
+
+void Cylinder::Display() const {
+    cout << "The volume of the " << GetName3D() << " is : " << Volume() << endl;
+    cout << "The height is: " << height << endl;
+    Circle::Display();
+}
+
+float Cylinder::Volume() const {
+    return Area() * height;
+}
+
+string Cylinder::GetName3D() const {
+    return name;
+}
+
+Sphere::Sphere() : Circle() {
+    radius = 0;
+}
+
+Sphere::Sphere(float radius) : Circle(radius) {
+    this->radius = radius;
+}
+
+void Sphere::Scale(float scalefactor) {
+    radius *= scalefactor;
+    Circle::Scale(scalefactor);
+}
+
+void Sphere::Display() const {
+    cout << "The volume of the " << GetName3D() << " is : " << Volume() << endl;
+    Circle::Display();
+}
+
+float Sphere::Volume() const {
+    return 4* pow(radius, 3.0) * PI / 3;
+}
+
+string Sphere::GetName3D() const {
+    return name;
+}

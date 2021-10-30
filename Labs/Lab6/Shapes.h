@@ -1,6 +1,6 @@
+#pragma once
 #include <iostream>
 #include <string>
-#include <math.h>
 using namespace std;
 
 // Base classes
@@ -8,7 +8,7 @@ class Shape {
 public:
     virtual void Scale(float scalefactor) = 0;
     virtual void Display() const = 0;
-    virtual ~Shape();
+    virtual ~Shape() {};
 };
 
 class Shape2D : virtual public Shape {
@@ -37,7 +37,7 @@ class Square : public Shape2D {
 public:
     Square();
     Square(float length);
-    virtual ~Square();
+    virtual ~Square() {};
     void Scale(float scalefactor);
     void Display() const;
     float Area() const;
@@ -51,7 +51,7 @@ class Triangle : public Shape2D {
 public:
     Triangle();
     Triangle(float base, float height);
-    virtual ~Triangle();
+    virtual ~Triangle() {};
     void Scale(float scalefactor);
     void Display() const;
     float Area() const;
@@ -65,9 +65,50 @@ class Circle : public Shape2D {
 public:
     Circle();
     Circle(float radius);
-    virtual ~Circle();
+    virtual ~Circle() {};
     void Scale(float scalefactor);
     void Display() const;
     float Area() const;
     string GetName2D() const;
+};
+
+class TriangularPyramid : public Shape3D, private Triangle {
+    string name = "TriangularPyramid";
+    float height;
+public:
+    TriangularPyramid();
+    TriangularPyramid(float height, float base, float height2);
+    virtual ~TriangularPyramid() {};
+    void Scale(float scalefactor);
+    void Display() const;
+    float Volume() const;
+    string GetName3D() const;
+};
+
+class Cylinder : public Shape3D, private Circle {
+    string name = "Cylinder";
+    float height;
+    const float PI = 3.14159f;
+public:
+    Cylinder();
+    Cylinder(float height, float radius);
+    virtual ~Cylinder() {};
+    void Scale(float scalefactor);
+    void Display() const;
+    float Volume() const;
+    string GetName3D() const;
+};
+
+class Sphere : public Shape3D, private Circle {
+    string name = "Sphere";
+    float radius;
+    const float PI = 3.14159f;
+public:
+    Sphere();
+    Sphere(float radius);
+    virtual ~Sphere() {};
+    void Scale(float scalefactor);
+    void Display() const;
+    float Volume() const;
+    string GetName3D() const;
 };

@@ -2,5 +2,6 @@
     "files.associations": {
         "iomanip": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "c-cpp-compile-run.cpp-flags": "-Wall -Wextra"
 }
