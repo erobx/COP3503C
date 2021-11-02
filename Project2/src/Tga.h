@@ -6,10 +6,12 @@
 using namespace std;
 
 class Tga {
-public:
-    Tga(string filePath);
     Header header;
     vector<Pixel> pixels;
+public:
+    Tga(string filePath);
     void WriteTga(string filePath);
-    void ChangeColor();
+    void ChangeColor(unsigned char red, unsigned char green, unsigned char blue);
+    void RandomColor();
+    vector<Pixel> GetPixels();
 };

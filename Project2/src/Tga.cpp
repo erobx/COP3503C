@@ -4,38 +4,37 @@
 using namespace std;
 
 Tga::Tga(string filePath) {
-    ifstream inFile(filePath, ios_base::binary);
+    ifstream file(filePath, ios_base::binary);
 
     Header headerObj;
     // Read header (18 bytes)
-    inFile.read(&headerObj.idLength, sizeof(headerObj.idLength));
-    inFile.read(&headerObj.colorMapType, sizeof(headerObj.colorMapType));
-    inFile.read(&headerObj.dataTypeCode, sizeof(headerObj.dataTypeCode));
-    inFile.read((char*)&headerObj.colorMapOrigin, sizeof(headerObj.colorMapOrigin));
-    inFile.read((char*)&headerObj.colorMapLength, sizeof(headerObj.colorMapLength));
-    inFile.read(&headerObj.colorMapDepth, sizeof(headerObj.colorMapDepth));
-    inFile.read((char*)&headerObj.xOrigin, sizeof(headerObj.xOrigin));
-    inFile.read((char*)&headerObj.yOrigin, sizeof(headerObj.yOrigin));
-    inFile.read((char*)&headerObj.width, sizeof(headerObj.width));
-    inFile.read((char*)&headerObj.height, sizeof(headerObj.height));
-    inFile.read(&headerObj.bitsPerPixel, sizeof(headerObj.bitsPerPixel));
-    inFile.read(&headerObj.imageDescriptor, sizeof(headerObj.imageDescriptor));
+    file.read(&headerObj.idLength, sizeof(headerObj.idLength));
+    file.read(&headerObj.colorMapType, sizeof(headerObj.colorMapType));
+    file.read(&headerObj.dataTypeCode, sizeof(headerObj.dataTypeCode));
+    file.read((char*)&headerObj.colorMapOrigin, sizeof(headerObj.colorMapOrigin));
+    file.read((char*)&headerObj.colorMapLength, sizeof(headerObj.colorMapLength));
+    file.read(&headerObj.colorMapDepth, sizeof(headerObj.colorMapDepth));
+    file.read((char*)&headerObj.xOrigin, sizeof(headerObj.xOrigin));
+    file.read((char*)&headerObj.yOrigin, sizeof(headerObj.yOrigin));
+    file.read((char*)&headerObj.width, sizeof(headerObj.width));
+    file.read((char*)&headerObj.height, sizeof(headerObj.height));
+    file.read(&headerObj.bitsPerPixel, sizeof(headerObj.bitsPerPixel));
+    file.read(&headerObj.imageDescriptor, sizeof(headerObj.imageDescriptor));
 
     header = headerObj;
 
-    // Read color data
+    // Read pixels
     int size = headerObj.width * headerObj.height;
     int currentPixel = 0;
     while (currentPixel < size) {
         Pixel pixel;
-        inFile.read((char*)&pixel.blue, sizeof(pixel.blue));
-        inFile.read((char*)&pixel.green, sizeof(pixel.green));
-        inFile.read((char*)&pixel.red, sizeof(pixel.red));
+        file.read((char*)&pixel.blue, sizeof(pixel.blue));
+        file.read((char*)&pixel.green, sizeof(pixel.green));
+        file.read((char*)&pixel.red, sizeof(pixel.red));
         pixels.push_back(pixel);
         currentPixel++;
     }
-
-    inFile.close();
+    file.close();
 }
 
 void Tga::WriteTga(string filePath) {
@@ -62,10 +61,27 @@ void Tga::WriteTga(string filePath) {
     }
 }
 
-void Tga::ChangeColor() {
-    for (Pixel p : pixels) {
-        p.blue = '0';
-        p.green = '0';
-        p.red;
+void Tga::ChangeColor(unsigned char red, unsigned char green, unsigned char blue) {
+    for (int i = 0; i < pixels.size(); i++) {
+        pixels.at(i).red = red;
+        pixels.at(i).green = green;
+        pixels.at(i).blue = blue;
     }
+}
+
+void Tga::RandomColor() {
+    for (int i = 0; i < pixels.size(); i++) {
+        int rndRed = rand() % 256;
+        int rndGreen = rand() % 256;
+        int rndBlue = rand() % 256;
+        pixels.at(i).red = (unsigned char) rndRed;
+        pixels.at(i).green = (unsigned char) rndGreen;
+        pixels.at(i).blue = (unsigned char) rndBlue;
+    }
+}
+
+
+
+vector<Pixel> Tga::GetPixels() {
+    return pixels;
 }
