@@ -27,9 +27,9 @@ int main()
 	cout << std::fixed << setprecision(2);
 	
 	// Input to seed a random number generator
-	// int randomInput;
-	// cin >> randomInput;
-	// ranGen.seed(randomInput);
+	int randomInput;
+	cin >> randomInput;
+	ranGen.seed(randomInput);
 	
 	int testNum;
 	cin >> testNum;
