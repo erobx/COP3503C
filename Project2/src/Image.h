@@ -13,3 +13,8 @@ struct Header {
     char bitsPerPixel;
     char imageDescriptor;
 };
+struct Pixel {
+    unsigned char blue;
+    unsigned char green;
+    unsigned char red;
+};
