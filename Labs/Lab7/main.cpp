@@ -8,6 +8,8 @@ using namespace std;
 
 mt19937 random_mt;
 
+// Test change
+
 struct State {
 	string name;
 	int capitaIncome;
